@@ -1,27 +1,22 @@
 using BinaryBuilder
-using BinaryProvider
 using CxxWrap
 
 const src_name = "VisuaDL"
 const src_version = v"1.2.1"
 
 platforms = [
-    BinaryProvider.Windows(:x86_64),
-    BinaryProvider.Linux(:x86_64, :glibc),
+    BinaryProvider.Linux(:x86_64, :gcc7),
     BinaryProvider.MacOS()
 ]
 
 sources = [
-    "https://api.github.com/repos/findmyway/VisualDL/tarball/julia" => "8723e690b9b7645b08ed520bd811949eb108f4f873caea40110478e33b96e48b"
+    "/home/tj/workspace/github/VisualDL"
 ]
 
-const JlCxx_DIR = get(ENV, "JLCXX_DIR", joinpath(dirname(CxxWrap.jlcxx_path), "cmake", "JlCxx"))
-const Julia_DIR = joinpath(Sys.BINDIR, "julia")
-
 script = raw"""
-cd $WORKSPACE/srcdir/VisualDL
+cd $WORKSPACE/srcdir
 mkdir build && cd build
-cmake -DJlCxx_DIR=$JlCXX_DIR -DJulia_EXECUTABLE=$Julia_DIR -DWITH_JULIA=ON ..
+cmake -DCMAKE_TOOLCHAIN_FILE=/opt/$target/$target.toolchain -DCMAKE_CXX_FLAGS="-march=x86-64" -DCMAKE_INSTALL_PREFIX=${prefix} -DCMAKE_FIND_ROOT_PATH=${prefix} -DJulia_PREFIX=${prefix} -DWITH_JULIA=ON -DWITH_PYTHON=OFF ..
 make
 """
 
@@ -29,6 +24,9 @@ products(prefix) = [
     LibraryProduct(prefix, joinpath("visualdl", "julia", "libvdljl"), :libvdljl)
 ]
 
-dependencies = []
+dependencies = [
+    "https://github.com/JuliaPackaging/JuliaBuilder/releases/download/v1.0.0-2/build_Julia.v1.0.0.jl",
+    "http://github.com/JuliaInterop/libcxxwrap-julia/releases/download/v0.5.1/build_libcxxwrap-julia-1.0.v0.5.1.jl"
+]
 
 build_tarballs(ARGS, src_name, src_version, sources, script, platforms, products, dependencies)
