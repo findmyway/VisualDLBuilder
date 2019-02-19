@@ -5,7 +5,7 @@ const src_name = "VisuaDL"
 const src_version = v"1.2.1"
 
 platforms = [
-    BinaryProvider.Linux(:x86_64, :gcc7),
+    BinaryProvider.Linux(:x86_64, :glibc),
     BinaryProvider.MacOS()
 ]
 
