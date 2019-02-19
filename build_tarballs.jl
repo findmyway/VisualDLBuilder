@@ -10,7 +10,7 @@ platforms = [
 ]
 
 sources = [
-    "https://tianjun.me/static/site_resources/visualdl.tar.gz"
+    "https://tianjun.me/static/site_resources/visualdl.tar.gz" => "fc6cb1f3291e3e21e0d1c53c1fdbd19d468b417e2da84038b8d5cfb79a00892b"
 ]
 
 script = raw"""
