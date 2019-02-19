@@ -10,7 +10,7 @@ platforms = [
 ]
 
 sources = [
-    "/home/tj/workspace/github/VisualDL"
+    "https://tianjun.me/static/site_resources/visualdl.tar.gz"
 ]
 
 script = raw"""
