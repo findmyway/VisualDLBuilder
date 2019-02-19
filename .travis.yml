@@ -25,5 +25,5 @@ before_script:
 script:
   - cd findmyway/VisualDLBuilder
   - julia --color=yes build_tarballs.jl
-  - cd ../../..
+  - cd ../..
   - ls -l products
