@@ -1,5 +1,4 @@
 using BinaryBuilder
-using CxxWrap
 
 const src_name = "VisuaDL"
 const src_version = v"1.2.1"
@@ -10,11 +9,11 @@ platforms = [
 ]
 
 sources = [
-    "https://tianjun.me/static/site_resources/visualdl.tar.gz" => "fc6cb1f3291e3e21e0d1c53c1fdbd19d468b417e2da84038b8d5cfb79a00892b"
+    "https://tianjun.me/static/site_resources/visualdl.tar.gz" => "79426ac64559d2cd1b10fde5491084d470fc0864ebe029c65ad1fb1c743c3787"
 ]
 
 script = raw"""
-cd $WORKSPACE/srcdir
+cd $WORKSPACE/srcdir/VisualDL
 mkdir build && cd build
 cmake -DCMAKE_TOOLCHAIN_FILE=/opt/$target/$target.toolchain -DCMAKE_CXX_FLAGS="-march=x86-64" -DCMAKE_INSTALL_PREFIX=${prefix} -DCMAKE_FIND_ROOT_PATH=${prefix} -DJulia_PREFIX=${prefix} -DWITH_JULIA=ON -DWITH_PYTHON=OFF ..
 make
