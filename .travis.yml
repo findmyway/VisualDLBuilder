@@ -22,4 +22,13 @@ before_script:
 
 script:
   - julia --color=yes build_tarballs.jl
-  - ls
+
+deploy:
+  provider: releases
+  api_key: 9b03ef0b813992c6e9ac8f4fde288daec870565d
+  file_glob: true
+  file: products/*
+  skip_cleanup: true
+  on:
+    repo: findmyway/VisualDLBuilder
+    tags: true
