@@ -8,7 +8,7 @@ platforms = [
 ]
 
 sources = [
-    "https://tianjun.me/static/site_resources/visualdl.tar.gz" => "79426ac64559d2cd1b10fde5491084d470fc0864ebe029c65ad1fb1c743c3787"
+    "https://tianjun.me/static/site_resources/visualdl.tar.gz" => "d512909eb54b28fd9474b87ff94a3d1161f34964d1e89fb61062297cfa8a7cf7"
 ]
 
 script = raw"""
@@ -16,10 +16,11 @@ cd $WORKSPACE/srcdir/VisualDL
 mkdir build && cd build
 cmake -DCMAKE_TOOLCHAIN_FILE=/opt/$target/$target.toolchain -DCMAKE_CXX_FLAGS="-march=x86-64" -DCMAKE_INSTALL_PREFIX=${prefix} -DCMAKE_FIND_ROOT_PATH=${prefix} -DJulia_PREFIX=${prefix} -DWITH_JULIA=ON -DWITH_PYTHON=OFF ..
 make
+make install
 """
 
 products(prefix) = [
-    LibraryProduct(prefix, joinpath("visualdl", "julia", "libvdljl"), :libvdljl)
+    LibraryProduct(prefix, "libvdljl", :libvdljl)
 ]
 
 dependencies = [
